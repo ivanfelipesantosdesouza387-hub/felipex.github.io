@@ -1,77 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RP Sistema</title>
-    <script>
-        // Array to hold user profiles
-        let profiles = [];
-        
-        // Function to add profile
-        function addProfile(name, email) {
-            const profile = { name, email, evidence: [] };
-            profiles.push(profile);
-            displayProfiles();
-        }
-        
-        // Function to display profiles
-        function displayProfiles() {
-            const profileList = document.getElementById('profile-list');
-            profileList.innerHTML = '';
-            profiles.forEach((profile, index) => {
-                const li = document.createElement('li');
-                li.textContent = `${profile.name} (${profile.email})`;
-                profileList.appendChild(li);
-            });
-        }
-        
-        // Function to submit evidence
-        function submitEvidence(profileIndex, evidence) {
-            profiles[profileIndex].evidence.push(evidence);
-            alert('Evidence submitted!');
-        }
-        
-        // Search functionality
-        function searchProfiles(searchTerm) {
-            const filteredProfiles = profiles.filter(profile => 
-                profile.name.includes(searchTerm) || profile.email.includes(searchTerm)
-            );
-            console.log('Filtered Profiles:', filteredProfiles);
-        }
-        
-        // Admin panel functionalities - Example functionality 
-        function viewAllEvidence() {
-            profiles.forEach(profile => {
-                console.log(`Evidence for ${profile.name}:`, profile.evidence);
-            });
-        }
-    </script>
+    <title>RP Sistema - Rio de Janeiro</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>RP Sistema</h1>
-    <section>
-        <h2>Add Profile</h2>
-        <input type="text" id="name" placeholder="Name">
-        <input type="email" id="email" placeholder="Email">
-        <button onclick="addProfile(document.getElementById('name').value, document.getElementById('email').value)">Add Profile</button>
-    </section>
-    <section>
-        <h2>Profiles</h2>
-        <ul id="profile-list"></ul>
-    </section>
-    <section>
-        <h2>Submit Evidence</h2>
-        <input type="text" id="evidence" placeholder="Evidence">
-        <button onclick="submitEvidence(0, document.getElementById('evidence').value)">Submit Evidence</button>
-    </section>
-    <section>
-        <h2>Search Profiles</h2>
-        <input type="text" id="search" oninput="searchProfiles(this.value)" placeholder="Search...">
-    </section>
-    <section>
-        <h2>Admin Panel</h2>
-        <button onclick="viewAllEvidence()">View All Evidence</button>
-    </section>
+    <header>
+        <h1>RP Sistema</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#search">Buscar</a></li>
+                <li><a href="#submit">Submeter Evidência</a></li>
+                <li><a href="#admin">Painel de Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <h2>Bem-vindo ao RP Sistema!</h2>
+            <p>Aqui você pode gerenciar suas evidências e interagir com o sistema.</p>
+        </section>
+        <section id="search">
+            <h2>Buscar Evidência</h2>
+            <input type="text" id="searchInput" placeholder="Digite para buscar...">
+            <button id="searchButton">Buscar</button>
+            <div id="searchResults"></div>
+        </section>
+        <section id="submit">
+            <h2>Submeter Evidência</h2>
+            <form id="evidenceForm">
+                <input type="text" id="evidenceTitle" placeholder="Título" required>
+                <textarea id="evidenceDescription" placeholder="Descrição" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+        <section id="admin">
+            <h2>Painel de Admin</h2>
+            <div id="adminPanel">
+                <!-- Admin functionalities here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2026 RP Sistema - Todos os direitos reservados.</p>
+    </footer>
 </body>
 </html>
