@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RP Sistema</title>
+    <script>
+        // Array to hold user profiles
+        let profiles = [];
+        
+        // Function to add profile
+        function addProfile(name, email) {
+            const profile = { name, email, evidence: [] };
+            profiles.push(profile);
+            displayProfiles();
+        }
+        
+        // Function to display profiles
+        function displayProfiles() {
+            const profileList = document.getElementById('profile-list');
+            profileList.innerHTML = '';
+            profiles.forEach((profile, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${profile.name} (${profile.email})`;
+                profileList.appendChild(li);
+            });
+        }
+        
+        // Function to submit evidence
+        function submitEvidence(profileIndex, evidence) {
+            profiles[profileIndex].evidence.push(evidence);
+            alert('Evidence submitted!');
+        }
+        
+        // Search functionality
+        function searchProfiles(searchTerm) {
+            const filteredProfiles = profiles.filter(profile => 
+                profile.name.includes(searchTerm) || profile.email.includes(searchTerm)
+            );
+            console.log('Filtered Profiles:', filteredProfiles);
+        }
+        
+        // Admin panel functionalities - Example functionality 
+        function viewAllEvidence() {
+            profiles.forEach(profile => {
+                console.log(`Evidence for ${profile.name}:`, profile.evidence);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>RP Sistema</h1>
+    <section>
+        <h2>Add Profile</h2>
+        <input type="text" id="name" placeholder="Name">
+        <input type="email" id="email" placeholder="Email">
+        <button onclick="addProfile(document.getElementById('name').value, document.getElementById('email').value)">Add Profile</button>
+    </section>
+    <section>
+        <h2>Profiles</h2>
+        <ul id="profile-list"></ul>
+    </section>
+    <section>
+        <h2>Submit Evidence</h2>
+        <input type="text" id="evidence" placeholder="Evidence">
+        <button onclick="submitEvidence(0, document.getElementById('evidence').value)">Submit Evidence</button>
+    </section>
+    <section>
+        <h2>Search Profiles</h2>
+        <input type="text" id="search" oninput="searchProfiles(this.value)" placeholder="Search...">
+    </section>
+    <section>
+        <h2>Admin Panel</h2>
+        <button onclick="viewAllEvidence()">View All Evidence</button>
+    </section>
+</body>
+</html>
